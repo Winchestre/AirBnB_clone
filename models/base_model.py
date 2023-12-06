@@ -2,7 +2,6 @@
 
 from uuid import uuid4
 from datetime import datetime
-import models
 
 class BaseModel():
 
@@ -11,8 +10,11 @@ class BaseModel():
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
-    def __str__():
-        print(f"[{self.__classname__}] ({self.id}) {self.__dict__}")
+    def __str__(self):
+      """Returns official string representation"""
+
+      return "[{}] ({}) {}".\
+          format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         self.updated_at = datetime.now()
