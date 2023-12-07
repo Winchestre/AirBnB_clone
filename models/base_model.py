@@ -30,9 +30,11 @@ class BaseModel():
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        dictionary = dict(self.__dict__)
+        dictionary = {}
+        for key, value in self.__dict__.items():
+            if key == "created_at" or key == "updated_at":
+                dictionary[key] = value.isoformat()
+            else:
+                dictionary[key] = value
         dictionary["__class__"] = self.__class__.__name__
-        for key, value in dictionary.items():
-            if isinstance(value, datetime):
-                dictionary[key] = datetime.isoformat(value)
         return dictionary
