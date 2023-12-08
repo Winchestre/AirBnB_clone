@@ -61,5 +61,121 @@ class HBNBCommand(cmd.Cmd):
             if len(args) < 3:
                 print()
                 return 1
+
+    def do_create(self, arg):
+        """Usage: create <class>
+        Create a new class instance and print its id.
+        """
+        if not arg:
+            print("** class name missing **")
+        elif arg not in HBNBCommand._all_classes:
+            print("** class doesn't exist **")
+        else:
+            created_instance = eval(arg)()
+            storage.save()
+            print(created_instance.id)
+
+    def do_show(self, arg):
+        """Usage: show <class> <id> or <class>.show(<id>)
+        Display the string representation of a class instance of a given id.
+        """
+        if not arg:
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            class_name = args[0]
+            if class_name not in HBNBCommand._all_classes:
+                print("** class doesn't exist **")
+            elif len(args) < 2:
+                print("** instance id missing **")
+            else:
+                instance_id = args[1]
+                key = "{}.{}".format(class_name, instance_id)
+                objects = storage.all()
+                if key in objects:
+                    print(objects[key])
+                else:
+                    print("** no instance found **")
+
+    def do_destroy(self, arg):
+        """Usage: destroy <class> <id> or <class>.destroy(<id>)
+        Delete a class instance of a given id."""
+        if not arg:
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            class_name = args[0]
+            if class_name not in HBNBCommand._all_classes:
+                print("** class doesn't exist **")
+            elif len(args) < 2:
+                print("** instance id missing **")
+            else:
+                instance_id = args[1]
+                key = "{}.{}".format(class_name, instance_id)
+                objects = storage.all()
+                if key in objects:
+                    del objects[key]
+                    storage.save()
+                else:
+                    print("** no instance found **")
+
+    def do_all(self, arg):
+        """Usage: all or all <class> or <class>.all()
+        Display string representations of all instances of a given class.
+        If no class is specified, displays all instantiated objects."""
+
+        objects = storage.all()
+
+        if arg:
+            args = arg.split()
+            if args[0] not in HBNBCommand._all_classes:
+                print("** class doesn't exist **")
+            else:
+                print([str(obj) for obj in objects.values() if obj.__class__.__name__ == args[0]])
+        else:
+            print([str(obj) for obj in objects.values()])
+
+    def do_update(self, arg):
+        """Usage: update <class> <id> <attribute_name> <attribute_value> or
+        <class>.update(<id>, <attribute_name>, <attribute_value>) or
+        <class>.update(<id>, <dictionary>)
+        Update a class instance of a given id by adding or updating
+        a given attribute key/value pair or dictionary."""
+
+        args = arg.split()
+        if not args or len(args) == 0:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in HBNBCommand._all_classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        instance_id = args[1]
+        key = "{}.{}".format(class_name, instance_id)
+        objects = storage.all()
+        if key not in objects:
+            print("** no instance found **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        attribute_name = args[3]
+        if len(args) == 4:
+            print("** value missing **")
+            return
+        attribute_value = args[4]
+        try:
+            attribute_value = eval(attribute_value)
+        except (NameError, SyntaxError):
+            pass
+        if attribute_name not in ["id", "created_at", "updated_at"]:
+            setattr(objects[key], attribute_name, attribute_value)
+            storage.save()
+        else:
+            print("** attribute cannot be updated **")
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

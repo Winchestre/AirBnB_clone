@@ -7,7 +7,6 @@ consistent handling
 """
 from uuid import uuid4
 from datetime import datetime
-from models
 
 class BaseModel():
     """Base class for other classes in the AirBnB clone"""
@@ -53,13 +52,14 @@ class BaseModel():
         models.storage.save()
 
     def to_dict(self):
-         """Returns a dictionary representation of the object.
+        """Returns a dictionary representation of the object.
 
          Returns:
             dict: A dictionary containing the objects attributes and
             the "__class__" key with the class name. Datetime objects
             are converted to ISO formatted strings.
-            """
+        """
+
         dictionary = {}
         for key, value in self.__dict__.items():
             if key == "created_at" or key == "updated_at":
