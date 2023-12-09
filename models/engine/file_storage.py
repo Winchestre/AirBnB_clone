@@ -4,7 +4,7 @@ from a file, as evident from the save, reload and new methods
 """
 import json
 from models.base_model import BaseModel
-
+from models.user import User
 
 class FileStorage():
     """FileStorage class that serializes instances to a

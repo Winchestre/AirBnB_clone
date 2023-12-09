@@ -5,6 +5,7 @@ import json
 import re
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -12,7 +13,8 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
     _all_classes = {
-            "BaseModel": BaseModel
+            "BaseModel": BaseModel,
+            "User": User
     }
 
     def do_EOF(self, arg):
