@@ -162,11 +162,11 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 2:
             print("** attribute name missing **")
             return
-        attribute_name = args[3]
-        if len(args) == 4:
+        attribute_name = args[2]
+        if len(args) == 3:
             print("** value missing **")
             return
-        attribute_value = args[4]
+        attribute_value = args[3]
         try:
             attribute_value = eval(attribute_value)
         except (NameError, SyntaxError):

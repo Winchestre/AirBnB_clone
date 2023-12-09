@@ -7,6 +7,7 @@ consistent handling
 """
 from uuid import uuid4
 from datetime import datetime
+import models
 
 class BaseModel():
     """Base class for other classes in the AirBnB clone"""
