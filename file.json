@@ -5,23 +5,17 @@
         "updated_at": "2023-12-08T19:51:34.817077",
         "__class__": "BaseModel"
     },
-    "User.27111537-491e-41f2-8435-8c3531dc84f7": {
-        "id": "27111537-491e-41f2-8435-8c3531dc84f7",
-        "created_at": "2023-12-08T19:55:35.753783",
-        "updated_at": "2023-12-08T19:55:35.753795",
-        "first_name": "Betty",
-        "last_name": "Bar",
-        "email": "airbnb@mail.com",
-        "password": "root",
+    "User.d6073726-ef50-4382-b402-9e2df8b43adc": {
+        "id": "d6073726-ef50-4382-b402-9e2df8b43adc",
+        "created_at": "2023-12-09T05:30:01.786446",
+        "updated_at": "2023-12-09T05:30:01.786452",
         "__class__": "User"
     },
-    "User.452d6cea-6aec-4aa3-a492-bbcdaff63b24": {
-        "id": "452d6cea-6aec-4aa3-a492-bbcdaff63b24",
-        "created_at": "2023-12-08T19:55:35.754367",
-        "updated_at": "2023-12-08T19:55:35.754375",
-        "first_name": "John",
-        "email": "airbnb2@mail.com",
-        "password": "root",
-        "__class__": "User"
+    "City.2deb4bad-4c82-4f58-87f2-3eb3af2fe969": {
+        "id": "2deb4bad-4c82-4f58-87f2-3eb3af2fe969",
+        "created_at": "2023-12-09T05:32:12.316201",
+        "updated_at": "2023-12-09T05:32:12.316205",
+        "city_name": "Aba",
+        "__class__": "City"
     }
 }

@@ -74,6 +74,62 @@ class HBNBCommand(cmd.Cmd):
                 print()
                 return 1
 
+    def default(self, arg):
+        """
+        Default behavior for cmd module when input is invalid
+        """
+        arg_list = arg.split('.')
+        cls_nm = arg_list[0]  # incoming class name
+        command = arg_list[1].split('(')
+        cmd_met = command[0]  # incoming command method
+        e_arg = command[1].split(')')[0]  # extra arguments
+
+        method_dict = {
+        'all': self.do_all,
+        'show': self.do_show,
+        'destroy': self.do_destroy,
+        'update': self.do_update,
+        # Add other methods as needed
+        }
+
+        if cmd_met in method_dict:
+            method = method_dict[cmd_met]
+            if cmd_met == 'update':
+                self.handle_update(cls_nm, e_arg)
+            else:
+                method("{} {}".format(cls_nm, e_arg))
+        else:
+            print("*** Unknown syntax: {}".format(arg))
+
+    def handle_update(self, cls_nm, e_arg):
+        """
+        Handle the update command separately
+        """
+        if not cls_nm:
+            print("** class name missing **")
+            return
+
+        try:
+            obj_id, arg_dict = self.split_curly_braces(e_arg)
+        except Exception:
+            return
+
+        try:
+            self.do_update("{} {} {}".format(cls_nm, obj_id, arg_dict))
+        except Exception:
+            return
+
+    def split_curly_braces(self, input_str):
+        """
+        Helper method to split input enclosed in curly braces into two parts.
+        """
+        match = re.match(r'\{(.*)\}', input_str)
+        if match:
+            groups = match.groups()
+            if len(groups) == 1:
+                return groups[0], {}
+        return None, None
+
     def do_create(self, arg):
         """Usage: create <class>
         Create a new class instance and print its id.
@@ -140,10 +196,17 @@ class HBNBCommand(cmd.Cmd):
 
         if arg:
             args = arg.split()
-            if args[0] not in HBNBCommand._all_classes:
-                print("** class doesn't exist **")
+            if '.' in args[0]:
+                class_name = args[0].split('.')[0]
+                if class_name not in HBNBCommand._all_classes:
+                    print("** class doesn't exist **")
+                else:
+                    print([str(obj) for obj in objects.values() if obj.__class__.__name__ == class_name])
             else:
-                print([str(obj) for obj in objects.values() if obj.__class__.__name__ == args[0]])
+                if args[0] not in HBNBCommand._all_classes:
+                    print("** class doesn't exist **")
+                else:
+                    print([str(obj) for obj in objects.values() if obj.__class__.__name__ == args[0]])
         else:
             print([str(obj) for obj in objects.values()])
 
