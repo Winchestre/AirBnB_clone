@@ -6,6 +6,11 @@ import re
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -14,7 +19,12 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     _all_classes = {
             "BaseModel": BaseModel,
-            "User": User
+            "User": User,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place,
+            "Review": Review
     }
 
     def do_EOF(self, arg):
