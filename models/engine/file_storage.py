@@ -50,8 +50,10 @@ class FileStorage():
             with open(FileStorage.__file_path, "r") as f:
                 data = json.load(f)
             for key, value in data.items():
-                if "BaseModel" in key:
-                    reloaded = BaseModel(**value)
+                class_name = value.get("__class__")
+                if class_name:
+                    del value["__class__"]
+                    reloaded = eval(class_name)(**value)
                     self.new(reloaded)
         except Exception:
             pass
