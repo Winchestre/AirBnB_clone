@@ -3,7 +3,7 @@
 import json
 import unittest
 from models.base_model import BaseModel
-import datetime from datetime
+from datetime import datetime
 import models
 from io import StringIO
 import sys
@@ -17,7 +17,7 @@ class BaseModelTestCase(unittest.TestCase):
 
     def setUp(self):
         """ class for base test """
-        self.filepath = models.storage.FileStorage.__file_path
+        self.filepath = models.storage._FileStorage__file_path
         with open(self.filepath, 'w') as file:
             file.truncate(0)
         models.storage.all().clear()
