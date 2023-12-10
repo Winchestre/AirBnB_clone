@@ -64,7 +64,7 @@ class BaseModel():
 
         dictionary = {}
         for key, value in self.__dict__.items():
-            if key == "created_at" or key == "updated_at":
+            if key in ["created_at", "updated_at"]:
                 dictionary[key] = value.isoformat()
             else:
                 dictionary[key] = value
