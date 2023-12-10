@@ -9,6 +9,7 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel():
     """Base class for other classes in the AirBnB clone"""
 
@@ -33,14 +34,14 @@ class BaseModel():
             models.storage.new(self)
 
     def __str__(self):
-      """Returns official string representation
+        """Returns official string representation
 
-      Returns:
-        str: A string containing the class name, the objects ID,
-        and its attributes.
-      """
+        Returns:
+            str: A string containing the class name, the objects ID,
+            and its attributes.
+        """
 
-      return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
+        return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
 
     def save(self):
         """Updates the "updated_at" attribute with the current

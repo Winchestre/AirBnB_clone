@@ -37,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program
         """
         return True
-    
+
     def emptyline(self):
         """An empty line + ENTER command should not
         execute anything
@@ -85,11 +85,11 @@ class HBNBCommand(cmd.Cmd):
         e_arg = command[1].split(')')[0]  # extra arguments
 
         method_dict = {
-        'all': self.do_all,
-        'show': self.do_show,
-        'destroy': self.do_destroy,
-        'update': self.do_update,
-        "count": self.do_count
+                'all': self.do_all,
+                'show': self.do_show,
+                'destroy': self.do_destroy,
+                'update': self.do_update,
+                "count": self.do_count
         }
 
         if cmd_met in method_dict:
@@ -201,12 +201,16 @@ class HBNBCommand(cmd.Cmd):
                 if class_name not in HBNBCommand._all_classes:
                     print("** class doesn't exist **")
                 else:
-                    print([str(obj) for obj in objects.values() if obj.__class__.__name__ == class_name])
+                    for obj in objects.values():
+                        if obj.__class__.__name__ == "class_name":
+                            print(str(obj))
             else:
                 if args[0] not in HBNBCommand._all_classes:
                     print("** class doesn't exist **")
                 else:
-                    print([str(obj) for obj in objects.values() if obj.__class__.__name__ == args[0]])
+                    for obj in objects.values():
+                        if obj.__class__.__name__ == args[0]:
+                            print(str(obj))
         else:
             print([str(obj) for obj in objects.values()])
 

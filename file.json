@@ -17,5 +17,43 @@
         "updated_at": "2023-12-09T05:32:12.316205",
         "city_name": "Aba",
         "__class__": "City"
+    },
+    "User.52ee4e45-5fef-4888-87ba-30912486fa60": {
+        "id": "52ee4e45-5fef-4888-87ba-30912486fa60",
+        "created_at": "2023-12-10T00:41:51.161475",
+        "updated_at": "2023-12-10T00:41:51.161522",
+        "first_name": "Betty",
+        "last_name": "Bar",
+        "email": "airbnb@mail.com",
+        "password": "root",
+        "__class__": "User"
+    },
+    "User.37db92c1-e3a6-4b92-a14c-3476a8203c51": {
+        "id": "37db92c1-e3a6-4b92-a14c-3476a8203c51",
+        "created_at": "2023-12-10T00:41:51.170943",
+        "updated_at": "2023-12-10T00:41:51.170990",
+        "first_name": "John",
+        "email": "airbnb2@mail.com",
+        "password": "root",
+        "__class__": "User"
+    },
+    "User.07b3a05a-27eb-4620-b4dd-828e58fc02e1": {
+        "id": "07b3a05a-27eb-4620-b4dd-828e58fc02e1",
+        "created_at": "2023-12-10T00:53:51.995497",
+        "updated_at": "2023-12-10T00:53:51.995532",
+        "first_name": "Betty",
+        "last_name": "Bar",
+        "email": "airbnb@mail.com",
+        "password": "root",
+        "__class__": "User"
+    },
+    "User.509c3a4b-e3ca-4488-88d1-33bf47096a3b": {
+        "id": "509c3a4b-e3ca-4488-88d1-33bf47096a3b",
+        "created_at": "2023-12-10T00:53:51.997751",
+        "updated_at": "2023-12-10T00:53:51.997790",
+        "first_name": "John",
+        "email": "airbnb2@mail.com",
+        "password": "root",
+        "__class__": "User"
     }
 }
