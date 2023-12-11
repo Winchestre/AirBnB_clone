@@ -82,42 +82,59 @@ class HBNBCommand(cmd.Cmd):
         cls_nm = arg_list[0]  # incoming class name
         command = arg_list[1].split('(')
         cmd_met = command[0]  # incoming command method
-        e_arg = command[1].split(')')[0]  # extra arguments
+        e_arg = command[1].strip(')')  # extra arguments
 
         method_dict = {
-                'all': self.do_all,
-                'show': self.do_show,
-                'destroy': self.do_destroy,
-                'update': self.do_update,
-                "count": self.do_count
+            'all': self.do_all,
+            'show': self.do_show,
+            'destroy': self.do_destroy,
+            'update': self.handle_update,
+            "count": self.do_count
         }
 
         if cmd_met in method_dict:
             method = method_dict[cmd_met]
             if cmd_met == 'update':
-                self.handle_update(cls_nm, e_arg)
+                try:
+                    cls_name, obj_id, rest = map(str.strip, e_arg.split(',', 2))
+                    if ',' in rest:
+                        attribute_name, attribute_value = map(str.strip, rest.split(',', 1))
+                        self.update_by_attribute(cls_name, obj_id, attribute_name, attribute_value)
+                    elif '{' in rest:
+                        attribute_dict = eval(rest)
+                        self.update_by_dictionary(cls_name, obj_id, attribute_dict)
+                    else:
+                      self.handle_update(cls_nm, e_arg)
+                except ValueError:
+                    print("*** Incorrect syntax: {}".format(arg))
             else:
                 method("{} {}".format(cls_nm, e_arg))
         else:
             print("*** Unknown syntax: {}".format(arg))
 
     def handle_update(self, cls_nm, e_arg):
-        """
-        Handle the update command separately
-        """
-        if not cls_nm:
-            print("** class name missing **")
-            return
-
-        try:
-            obj_id, arg_dict = self.split_curly_braces(e_arg)
-        except Exception:
-            return
-
-        try:
-            self.do_update("{} {} {}".format(cls_nm, obj_id, arg_dict))
-        except Exception:
-            return
+      """
+      Handle the update command separately
+      """
+      if not cls_nm:
+          print("** class name missing **")
+          return
+  
+      try:
+          obj_id, rest = map(str.strip, e_arg.split(',', 1))
+          obj_id = obj_id.strip(' "')
+          if ',' in rest:
+              attribute_name, attribute_value = map(str.strip, rest.split(',', 1))
+              attribute_name = attribute_name.strip(' "')
+              attribute_value = attribute_value.strip(' "')
+              self.update_by_attribute(cls_nm, obj_id, attribute_name, attribute_value)
+          elif '{' in rest:
+              attribute_dict = eval(rest)
+              self.update_by_dictionary(cls_nm, obj_id, attribute_dict)
+          else:
+              print("*** Incorrect syntax: {}".format(e_arg))
+      except ValueError:
+          print("*** Incorrect syntax: {}".format(e_arg))
 
     def split_curly_braces(self, input_str):
         """
@@ -255,6 +272,41 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         else:
             print("** attribute cannot be updated **")
+
+    def update_by_attribute(self, cls_name, obj_id, attribute_name, attribute_value):
+        """
+        Update a class instance of a given id by updating a given attribute.
+        """
+        key = "{}.{}".format(cls_name, obj_id)
+        objects = storage.all()
+
+        if key not in objects:
+            print("** no instance found **")
+            return
+
+        if attribute_name not in ["id", "created_at", "updated_at"]:
+            setattr(objects[key], attribute_name, attribute_value)
+            storage.save()
+        else:
+            print("** attribute cannot be updated **")
+
+
+    def update_by_dictionary(self, cls_name, obj_id, attribute_dict):
+        """
+        Update a class instance of a given id using a dictionary.
+        """
+        key = "{}.{}".format(cls_name, obj_id)
+        objects = storage.all()
+
+        if key not in objects:
+            print("** no instance found **")
+            return
+
+        for key, value in attribute_dict.items():
+            if key not in ["id", "created_at", "updated_at"]:
+                setattr(objects[key], key, value)
+                storage.save()
+
 
     def do_count(self, arg):
         """Usage: <class name>.count()
