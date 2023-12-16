@@ -9,10 +9,20 @@ h1, h2, h3, h4, h5, h6 {
     margin-block: 0;
 }
 
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
 .container {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
+    margin: 30px auto;
     max-width: 1000px;
-    margin-block: 30px;
 }
