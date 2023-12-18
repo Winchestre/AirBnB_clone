@@ -23,7 +23,7 @@ button:hover {
     opacity: .9;
 }
 
-.amenities {
+.filters>.amenities, .locations {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,16 +36,7 @@ button:hover {
 }
 
 .locations {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    height: 100%;
-    width: 25%;
-    line-height: 20px;
     border-right: 1px solid #DDD;
-    position: relative;
 }
 
 .locations h3, .amenities h3 {
@@ -76,4 +67,43 @@ button:hover {
 
 .popover h2 {
     font-size: 16px;
+}
+
+
+/*         SMALL SCREENS            */
+
+/*********MAX 768PX***********/
+@media screen and (max-width: 768px) {
+    button {
+        font-size: 18px;
+        height: 40px;
+    }    
+}
+
+/*******MAX 375PX*************/
+@media screen and (max-width: 375px) {
+    button {
+        display: none;
+    }
+
+    .filters {
+        width: 98%;
+        border-radius: 0;
+        margin: 0 auto;
+    }
+
+    .filters:after {
+        content: url(../images/search.png);
+        float: right;
+        margin-top: 22px;
+        margin-right: 10px;
+    }
+
+    .filters>.amenities, .locations {
+        padding-inline: 5px;
+    }
+
+    .locations h4, .filters>.amenities h4 {
+        display: none;
+    }
 }

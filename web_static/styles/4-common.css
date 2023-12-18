@@ -4,6 +4,7 @@ body {
     color: #484848;
     font-size: 14px;
     font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
 }
 h1, h2, h3, h4, h5, h6 {
     margin-block: 0;

@@ -1,8 +1,15 @@
- header {
-            height: 70px;
-            width: 100%;
-            background-color: #fff;
-            border-bottom: 1px solid #ccc;
-            background-image: url("../images/logo.png");
-            background-repeat: no-repeat;
-        }
+header {
+    height: 70px;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+}
+
+/********SMALL SCREEN DEVICES*******/
+@media screen and (max-width: 767px) {
+    header {
+        height: 60px;
+    }
+}
