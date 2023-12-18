@@ -138,6 +138,10 @@ article>.amenities>ul>li>h4 {
 
 /*       MEDIA SCREEN       */
 @media screen and (max-width: 375px) {
+    .places {
+        width: 99%;
+        margin-inline: 0 auto;
+    }
     .places h1 {
         font-size: 25px;
     }
@@ -147,6 +151,10 @@ article>.amenities>ul>li>h4 {
         margin-top: 8px;
         flex-basis: 1;
         gap: 8px;
+    }
+
+    .article-header {
+        font-size: 22px;
     }
 
     article {
@@ -171,5 +179,29 @@ article>.amenities>ul>li>h4 {
 
     .reviews {
         margin-top: 25px;
+    }
+}
+
+@media screen and (min-width: 425px) and (max-width: 767px) {
+    .places {
+        margin-inline:  auto;
+    }
+
+    .places h1 {
+        margin-left: 4%;
+    }
+
+    .article-container {
+        gap: 12px;
+    }
+
+    article {
+        margin-inline: auto;
+    } 
+}
+
+@media screen and (max-width: 943px) {
+    article {
+        margin-inline: auto;
     }
 }

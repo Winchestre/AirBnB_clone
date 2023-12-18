@@ -63,6 +63,7 @@ button:hover {
     position: absolute;
     top: 80%;
     display: none;
+    backdrop-filter: blur(10px);
 }
 
 .popover h2 {
@@ -70,9 +71,8 @@ button:hover {
 }
 
 
-/*         SMALL SCREENS            */
+/***********SMALL SCREENS********/
 
-/*********MAX 768PX***********/
 @media screen and (max-width: 768px) {
     button {
         font-size: 18px;
@@ -80,7 +80,6 @@ button:hover {
     }    
 }
 
-/*******MAX 375PX*************/
 @media screen and (max-width: 375px) {
     button {
         display: none;
@@ -104,6 +103,16 @@ button:hover {
     }
 
     .locations h4, .filters>.amenities h4 {
-        display: none;
+        font-size: 13px;
+    }
+
+    .popover h4 {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 425px) and (max-width: 767px) {
+    .locations h4, .filters>.amenities h4 {
+        font-size: 12px;
     }
 }
